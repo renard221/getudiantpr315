@@ -1,0 +1,8 @@
+<span>Id:{{etudiant.id}}</span><br/>
+<span>Prenom:{{etudiant.prenom}}</span><br/>
+<span>Nom:{{etudiant.nom}}</span><br/>
+@if (etudiant.verified){
+  <span> virifier</span>
+} @else {
+  <button class="btn btn-success" (click)="envoyerVerification()"> verifier</button>
+}

@@ -1,0 +1,30 @@
+<div class="container">
+
+<form #formet="ngForm" (ngSubmit)="onSubmit(formet)">
+
+  <div class="form-group">
+    <label>Prenom</label>
+    <input type="text" class="form-control" name="prenom" ngModel>
+  </div>
+  <div class="form-group">
+    <label>Nom</label>
+    <input type="text" class="form-control" name="nom" ngModel>
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" class="form-control" name="email" ngModel>
+  </div>
+
+  <div class="form-group">
+    <label>M. Inscription</label>
+    <input type="number" class="form-control" name="montant" ngModel>
+  </div>
+
+  <button class="btn btn-default" type="reset" >Annuler</button>
+  <button class="btn btn-primary" type="submit">Envoyer</button>
+
+</form>
+
+
+
+</div>

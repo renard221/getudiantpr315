@@ -1,0 +1,15 @@
+@for ( et of tabEtudiants;track et.id){
+  <div class="alert alert-primary">
+    <app-detailsetudiant  [etudiant]="et"  (verified)="etudiantVerification($event)" ></app-detailsetudiant>
+  </div>
+}
+
+<label>Couleur</label>
+<input type="text"  [(ngModel)]="couleur"/>
+
+{{couleur}}
+
+
+<p  [style.color]="couleur">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque officiis pariatur perspiciatis porro, tempora voluptatibus! Accusantium ad animi consectetur, consequuntur dolore, doloremque eaque impedit iusto obcaecati quaerat voluptatem voluptates?
+</p>
