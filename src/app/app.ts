@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import { NgIf, NgForOf} from '@angular/common';
 import {checkCleanGit} from '@angular/cli/src/commands/update/utilities/git';
 import {Detailsetudiant} from './composant/detailsetudiant/detailsetudiant';
@@ -8,7 +8,7 @@ import {Addetudiant} from './composant/addetudiant/addetudiant';
 
 @Component({
   selector: 'app-root',
-  imports: [NgIf,NgForOf,Listetudiant,Addetudiant],
+  imports: [NgIf,NgForOf,Listetudiant,Addetudiant,RouterOutlet,RouterLink],
   templateUrl: './app.html',
   standalone:true,
   styleUrl: './app.scss'
