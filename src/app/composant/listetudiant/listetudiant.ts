@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Etudiant} from '../../model';
 import {Detailsetudiant} from '../detailsetudiant/detailsetudiant';
 import {FormsModule} from '@angular/forms';
+import {EtudiantService} from '../../service/etudiant-service';
 
 @Component({
   selector: 'app-listetudiant',
@@ -17,6 +18,9 @@ export class Listetudiant {
     {id:3,prenom:"fatou",nom:"sarr",verified:false},
     {id:4,prenom:"matar",nom:"sene",verified:false}
   ]
+  public constructor(private etService:EtudiantService ) {
+    console.log(this.etService.getEtudiants());
+  }
 
   couleur="red";
 

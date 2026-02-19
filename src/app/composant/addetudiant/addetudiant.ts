@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Etudiant, EtudiantService} from '../../service/etudiant-service';
 
 @Component({
   selector: 'app-addetudiant',
@@ -18,11 +19,25 @@ export class Addetudiant {
     montant:[0,[Validators.required]],
 
   })
+  etInjectService  = Inject(EtudiantService);
+
+  public constructor(private etService:EtudiantService ) {
+  }
 
 
   onSubmit(){
-    console.log(this.formGroup.value);
-    console.log(this.formGroup.invalid);
+    console.log(this.etService.getEtudiants());
+    let prenom  =this.formGroup.value.prenom
+    let et:Etudiant={
+      id:this.etService.getEtudiants()[this.etService.getEtudiants().length-1].id,
+      prenom:this.formGroup.value.prenom,
+      nom:this.formGroup.value?.nom,
+    }
+    this.etService.addEtudiant(et);
+
+    console.log(this.etService.getEtudiants());
+
+
   }
 
 
