@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {Etudiant} from '../../model';
 import {Detailsetudiant} from '../detailsetudiant/detailsetudiant';
 import {FormsModule} from '@angular/forms';
 import {EtudiantService} from '../../service/etudiant-service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-listetudiant',
@@ -12,14 +13,13 @@ import {EtudiantService} from '../../service/etudiant-service';
   styleUrl: './listetudiant.scss',
 })
 export class Listetudiant {
+  detectChange = inject(ChangeDetectorRef);
   tabEtudiants:Etudiant[] = [
-    {id:1,prenom:"serigne",nom:"diop",verified:false},
-    {id:2,prenom:"modou",nom:"ndiaye",verified:true},
-    {id:3,prenom:"fatou",nom:"sarr",verified:false},
-    {id:4,prenom:"matar",nom:"sene",verified:false}
+
   ]
   public constructor(private etService:EtudiantService ) {
-    console.log(this.etService.getEtudiants());
+
+    this.getEtudiants()
   }
 
   couleur="red";
@@ -30,6 +30,20 @@ export class Listetudiant {
     if(et){
       et.verified = true;
     }
+  }
+
+  getEtudiants(){
+      this.etService.getEtudiants().subscribe({
+        next:(data=>{
+          console.log(data)
+
+          this.tabEtudiants = data
+          this.detectChange.detectChanges();
+        }),
+        error:(err=>{
+          console.log(err)
+        })
+      })
   }
 }
 

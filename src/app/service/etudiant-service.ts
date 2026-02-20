@@ -1,23 +1,22 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
+import {Etudiant} from '../model';
+import {HttpClient} from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 
-export interface  Etudiant {
-  id: number;
-  prenom: any;
-  nom: any;
-}
+const baseUrl = 'http://localhost:8000/api/etudiants';
+
+// @ts-ignore
 @Injectable({
   providedIn: 'root',
 })
 export class EtudiantService {
 
-  tabEtudiant:Etudiant[] = [
-    {id:1,prenom:"serigne",nom:"diop"},
-    {id:2,prenom:"modou",nom:"ndiaye"},
-    {id:3,prenom:"sokhna",nom:"sarr"},
-  ]
+  http = inject(HttpClient);
+
+
 
   addEtudiant(etudiant:Etudiant){
-    this.tabEtudiant.push(etudiant);
+    return this.http.post(baseUrl,etudiant);
   }
   getEtudiantById(id:number){
     /*for (let i = 0; i < this.tabEtudiant.length; i++) {
@@ -26,19 +25,24 @@ export class EtudiantService {
       }
     }
     return null;*/
-    return this.tabEtudiant.find(e=>e.id == id)
+    //return this.tabEtudiant.find(e=>e.id == id)
 
   }
-  public getEtudiants(){
-    return this.tabEtudiant
+  public getEtudiants():Observable<Etudiant[]>{
+      return this.http.get<Etudiant[]>(baseUrl).pipe(
+         map(rep=>
+               rep.map(p=>  (
+                 {
+                   ...p,
+                   verified: false
+                 }
+               ))
+        )
+      )
   }
 
   updateEtudiant(et:Etudiant){
-    for (let i = 0; i < this.tabEtudiant.length; i++) {
-      if (this.tabEtudiant[i].id == et.id){
-       this.tabEtudiant[i] = et
-      }
-    }
+
 
   }
 
